@@ -1,0 +1,10 @@
+"$schema" = "schemas/schema.json"
+
+[default]
+description = "Default permissions for fors-msal"
+permissions = [
+  "allow-init",
+  "allow-sign-in-silent",
+  "allow-sign-in-interactive",
+  "allow-sign-out",
+]
