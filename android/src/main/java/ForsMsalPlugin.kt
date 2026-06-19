@@ -26,7 +26,7 @@ import java.security.MessageDigest
 @InvokeArg
 class InitArgs {
     lateinit var clientId: String
-    var tenantId: String = "37e2c3f8-d936-4d6a-af0f-922879a4b5de"
+    lateinit var tenantId: String
     var scopes: List<String> = listOf("User.Read")
 }
 
@@ -94,6 +94,10 @@ class ForsMsalPlugin(private val activity: Activity) : Plugin(activity) {
     fun init(invoke: Invoke) {
         try {
             val args = invoke.parseArgs(InitArgs::class.java)
+            if (args.clientId.isBlank() || args.tenantId.isBlank()) {
+                invoke.reject("clientId and tenantId are required")
+                return
+            }
             scopes = args.scopes.toTypedArray()
             val configFile = writeAuthConfig(args)
             PublicClientApplication.createSingleAccountPublicClientApplication(

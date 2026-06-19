@@ -6,14 +6,9 @@ use crate::{models::*, ForsMsalExt};
 #[derive(Debug, Deserialize)]
 pub struct InitArgs {
     pub client_id: String,
-    #[serde(default = "default_tenant")]
     pub tenant_id: String,
     #[serde(default = "default_scopes")]
     pub scopes: Vec<String>,
-}
-
-fn default_tenant() -> String {
-    "37e2c3f8-d936-4d6a-af0f-922879a4b5de".into()
 }
 
 fn default_scopes() -> Vec<String> {
