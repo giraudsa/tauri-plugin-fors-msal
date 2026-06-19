@@ -29,13 +29,17 @@ tauri::Builder::default()
 
 ### JavaScript
 
+On Tauri v2 mobile, command arguments are passed in an `args` wrapper:
+
 ```js
 import { invoke } from '@tauri-apps/api/core';
 
 await invoke('plugin:fors-msal|init', {
-  clientId: '<azure-client-id>',
-  tenantId: '<tenant-id>',
-  scopes: ['User.Read'],
+  args: {
+    client_id: '<azure-client-id>',
+    tenant_id: '<tenant-id>',
+    scopes: ['User.Read'],
+  },
 });
 
 const auth = await invoke('plugin:fors-msal|sign_in_interactive');
